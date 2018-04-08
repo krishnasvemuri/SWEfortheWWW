@@ -1,0 +1,190 @@
+
+
+<html>
+<head>
+<title>
+Welcome to the survey page
+</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+</head>
+<body>
+<div>
+<a href="https://www2.gmu.edu" target="_blank"><img id="logo" src="logo.jpg" style ="position:fixed;bottom:0;right:10%" title = "Please visit https://www.gmu.edu for more information."> </a>
+<h4 style="position:fixed;bottom:0;right:0%"><br>Vemuri</h4>
+</div>
+<style>
+h1 {
+    color: blue;
+	text-shadow: 2px 2px;
+}
+body {
+     background-color: lightgray;	 
+}
+</style>
+<h1>Survey form</h1>
+<hr>
+<form id="form1" name="survey" autocomplete="on" autofocus="autofocus" method="post" >
+<table>
+<tr>
+<td>user name
+</td>
+<td>
+<input id="username" type="text" name="username" maxlength="20" size="10" required= "required" autofocus="autofocus"/>
+</td>
+</tr>
+<tr>
+<td>street address
+<td>
+<input id="address" type="text" name="address" maxlength="20" size="10" required= "required"/>
+</td>
+</tr>
+<tr>
+<td>city
+</td>
+<td>
+<span type="text" id="city" name="City" placeholder="city"></span>
+</td>
+</tr> 
+<tr>
+<td>state
+</td>
+<td>
+<span type="text" id="state" name="state" placeholder="state"></span>
+</td>
+</tr>
+<tr>
+<td>zip
+</td>
+<td>
+<input name="zip" type="number"  maxlength="5" id="zip" form="form1" required="required" autocomplete="on" placeholder="#####" onblur = "xyz()">
+</td>
+<td>
+<span id='zipalert'>
+</td>
+</tr> 
+<tr>
+<td>telephone
+</td>
+<td>
+<input id="phone" type="text" name="phone" maxlength="20" size="10" required= "required" placeholder="5712121212"/>
+</td>
+</tr>
+<tr>
+<td>e-mail
+</td>
+<td>
+<input id="email" type="e-mail" name="email" maxlength="20" size="10" required= "required" placeholder="example@gmu.edu"/>
+</td>
+</tr>
+<tr>
+<td>URL(if any)
+</td>
+<td>
+<input id="url" type="url" name="url" maxlength="20" size="40" placeholder="https://mason.gmu.edu"/>
+</td>
+</tr>
+<tr>
+<td>date of survey
+</td>
+<td>
+<input id="dos" type="date" name="dos" maxlength="20" size="20" required="required"/>
+</td>
+</tr>
+<tr>
+<td> What did you like most about the campus?</td>
+<td> 
+<hr>
+<label><input id="students" type="checkbox" name="choice" value="students">Students</label><br>
+<label><input id="location" type="checkbox" name="choice" value="location">Location</label><br>
+<label><input id="campus" type="checkbox" name="choice" value="campus">Campus</label><br>
+<label><input id="atmosphere" type="checkbox" name="choice" value="atmosphere">Atmosphere</label><br>
+<label><input id="dorm rooms" type="checkbox" name="choice" value="dorm rooms">Dorm Rooms</label><br>
+<label><input id="sports" type="checkbox" name="choice" value="sports">Sports</label>
+<hr>
+</td>
+</tr>
+<tr>
+<td> How were you interested in GMU?</td>
+<td>
+<label><input id="friends" type="radio" name="source" value="Friends">Friends</label><br>
+<label><input id="television" type="radio" name="source" value="Television">Television</label><br>
+<label><input id="internet" type="radio" name="source" value="Internet">Internet</label><br>
+<label><input id="others" type="radio" name="source" value="Others">Others</label>
+<hr>
+</td>
+</tr>
+<tr>
+<td>Additional Comments:</td>
+<td>
+<textarea id="comments" name="Additional Comments" rows="10" cols="30">
+</textarea>
+<hr>
+</td>
+</tr>
+<tr>
+<td> High School Graduation Month</td>
+<td> <select name="month">
+<option id="jan" value="January" selected="">January</option>
+<option id="feb" value="February">February</option>
+<option id="mar" value="March">March</option>
+<option id="apr" value="April">April</option>
+<option id="may" value="May">May</option>
+<option id="jun" value="June">June</option>
+<option id="jul" value="July">July</option>
+<option id="aug" value="August">August</option>
+<option id="sep" value="September">September</option>
+<option id="oct" value="October">October</option>
+<option id="nov" value="November">November</option>
+<option id="dec" value="December">December</option>
+		
+</select>
+</td>
+</tr>
+<tr>
+<td>High School Graduation Year
+</td>
+<td>
+<input id="year" type="text" name="year" maxlength="4" size="4" required>
+<hr>
+</td>
+</tr>
+<tr>
+<td>Likelihood of recommending this school
+</td>
+<td>
+<select>
+<option id="vl" value="Very Likely">Very Likely</option>
+<option id="l" value="Likely">Likely</option>
+<option id="ul" value="Unlikely">Unlikely</option>
+</select>
+</td>
+</tr>
+<tr>
+<td>
+</td>
+</tr>
+<tr>
+<td>Enter 10 numbers from 1 to 100 seperated by a comma
+</td>
+<td><input id= "inputval" type="text" onblur="abc()" />
+</td>
+</tr> 
+<tr>
+<td>Average
+</td>
+<td><input id="output" type="text" size="15" />
+</td>
+</tr>
+<tr>
+<td>Maximum
+</td>
+<td><input id="outputsubstring" type="text" size="15">
+</td>
+</tr>
+</table> <br />
+<input type="submit" value="Submit" onclick="return validate()">
+<input type="reset">
+</form>
+</body>
+</html>

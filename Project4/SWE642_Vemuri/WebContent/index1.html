@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>
+Welcome to the survey page
+</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+var now = new Date();
+var hour = now.getHours();
+var name;
+
+if(hour < 12)
+  document.write("<h2>Good Morning, ");
+else
+{
+  hour = hour - 12;
+  if(hour < 6)
+    document.write("<h2>Good Afternoon, ");
+  else
+    document.write("<h2>Good Evening, ");
+}
+
+if(document.cookie)
+{
+  var mycookie = unescape(document.cookie);
+  var cookieTokens = mycookie.split("=");
+  name = cookieTokens[1];
+}
+else
+{ 
+  name = window.prompt("Please Enter Your Name: ", name);
+      document.cookie = "name=" + escape(name) ;
+  
+}
+document.writeln(name + ", Welcome to my page. </h2>");
+document.writeln("<a href='javascript:wrongPerson()'> " + "Click here if you are not " + name + "</a>");
+
+function wrongPerson()
+{
+document.cookie = "name=null;" + "expires = Fri, 03-Mar-16  00:00:01 GMT";
+location.reload();
+
+}
+
+function validate() {
+  var name1 = document.getElementById("username").value;
+  var address = document.getElementById("address").value;
+  var email = document.getElementById("email").value;
+  var namereg = /^[A-Za-z]+$/;
+  var addressreg = /^[a-zA-Z0-9\s,'-]*$/;
+  var emailreg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  var errorMsg = new Array();
+  
+    if(name1.match(namereg))
+    {
+        errorMsg[0] = "Name : Valid"; 
+    }
+    else{
+        errorMsg[0] = "Invalid name.";
+        document.getElementById("username").value = '';
+    }
+      if(address.match(addressreg) && address != '')
+      {
+          errorMsg[1] = "Address: Invalid";
+      }
+      else{
+          errorMsg[1] = "Invalid address.";
+          document.getElementById("address").value = '';
+      }
+        if(email.match(emailreg) && email != '')
+        {
+            errorMsg[2] = "Email: Valid";
+        }
+        else{
+            errorMsg[2] = "Invalid Email address.";
+            document.getElementById("email").value = '';
+        }
+          if(document.getElementById("friends").checked || document.getElementById("television").checked || document.getElementById("internet").checked || document.getElementById("others").checked )
+          {
+            errorMsg[3] = "Radio button: Selected";
+          }
+          else{
+            errorMsg[3] = "Must select a radio button.";
+          }
+            if(validate1())
+            {
+                errorMsg[4] = "Checkbox: 2 selected";
+          }
+          else{
+              errorMsg[4] = "Must select Atleast 2 checkboxes.";
+          }
+            
+  var x = errorMsg[0] + "\n";
+  for(var i=1;i<=errorMsg.length-1;i++){
+  x += errorMsg[i] + "\n" ;
+  }   
+  alert(x);
+  if(errorMsg[0] == "No Error" && errorMsg[1] == "No Error" && errorMsg[2] == "No Error" && errorMsg[3] == "No Error" && errorMsg[4] == "No Error" )
+    return true;
+  else
+    return false;
+
+}
+
+</script>
+<script>
+$(function()
+		
+{
+	$("#logo").tooltip();
+});
+$(function(){
+	$("#tabbed-panel-div").tabs();
+});
+
+function xyz(){
+	  
+	var xmlhttp = new XMLHttpRequest(); 	
+	xmlhttp.onreadystatechange = function() {
+	    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	  
+	      var i=0;
+	      var zips = document.getElementById("zip").value;
+
+	      document.getElementById("city").value = " ";
+	      document.getElementById("state").value = " "; 
+	      	
+	        var A = xmlhttp.responseText;
+	        var obj = JSON.parse(A);
+	        var n = obj.zipcodes.length;
+	        var flag = "false";
+	        
+	        for(i=0; i<n; i++){
+	          
+	          var zip1 = parseInt(obj.zipcodes[i].zip);
+	          var input = parseInt(zips);
+	          
+	          if(zip1 === input){
+	            flag = "true";
+	            document.getElementById("city").value = obj.zipcodes[i].city;
+	            document.getElementById("state").value = obj.zipcodes[i].state;
+	          }
+	          
+	        }
+	        
+	        if(flag.match("false")){
+	          alert("Please enter a valid Zip Code");
+	        }
+	        
+	    }
+	}
+	
+	xmlhttp.open("GET", "zipcodes.json", true);
+	xmlhttp.send();
+
+	}
+function DataCheck()
+{
+    var data = document.getElementById("textdata").value;
+    var values = data.split(',');
+    
+    if(values[(values.length)-1] == "")
+    {
+        values.length--;
+    }
+    if(values.length <10)
+   
+    {
+        alert("Please enter 10 values");
+        $("textarea").focus();
+    }
+}
+	
+</script>
+<style>
+h1 {
+vb/n    color: blue;
+	text-shadow: 2px 2px;
+}
+body {
+     background-color: lightgray;	 
+}
+</style>
+</head>
+<body>
+<div>
+<a href="https://www2.gmu.edu" target="_blank"><img id="logo" src="logo.jpg" style ="position:fixed;bottom:0;right:10%" title = "Please visit https://www.gmu.edu for more informatio"> </a>
+<h4 style="position:fixed;bottom:0;right:0%"><br>Vemuri</h4>
+</div>
+<h1  onload="greeting()" > Win 2 movie tickets by taking the survey</h1>
+<form action="MainServlet" method="post" autocomplete="on">
+        <table>
+                <tr>
+                    <td>
+                        <label>Student ID</label><br>
+                        <input id="studentId" type="text" maxlength="25" name="studentId"  required= "required" autofocus />
+                    </td>
+                    
+                    <td>
+                        <label>Name</label><br>
+                        <input id="username" type="text" maxlength="25" name="username" placeholder="Name" required= "required" />
+                    </td>
+                    
+                    <td>
+                         <label>Street Address</label><br>
+                        <input id="address" type="text" maxlength="25" name="address" required= "required"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    
+                        <label>City</label><br>
+						<input type="text" id="city" name="city" placeholder="city">
+                    </td>
+                    <td>
+                        <label>State</label><br>
+                        <input type="text" id="state" name="state" placeholder="state">
+                    </td>
+                    <td>
+                        <label>Zip</label><br>
+                        <input id="zip" name="zip" type="number"  maxlength="5"  required="required" autocomplete="on" placeholder="#####" onblur = "xyz()">
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Phone Number</label><br>
+                        <input id="phone" type="tel" maxlength="25" name="phone"  placeholder="xxxxxxxxxx" required= "required"/>
+                    </td>
+                    <td>
+                        <label>E-mail</label><br>
+                        <input id="email" type="email" maxlength="25" name="email"  placeholder="example@masonlive.gmu.edu" required= "required"/>
+                    </td>
+                    <td>
+                        <label>URL (if any)</label><br>
+                        <input id="url" type="url" maxlength="25" name="url" placeholder="http://www.gmu.edu"/>
+                    </td>
+                   
+				</tr>
+				<tr>
+                    <td>
+                        <label>Date of Survey</label><br>
+                        <input id="dos" type="date" maxlength="25" name="dos" placeholder="MM-DD-YYYY" required= "required"/>
+                    </td>
+                    <td>
+                        <label>What did you like the most about the Campus?</label>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input id="check" type="checkbox" name="choice" value="students" class="check" />
+                                    <label>Students</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="choice" value="location" class="check" />
+                                    <label>Location</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="choice" value="atmosphere" class="check" />
+                                    <label>Atmosphere</label>
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <input type="checkbox" name="choice" value="campus" class="check" />
+                                    <label>Campus</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="choice" value="dorm rooms" class="check" />
+                                    <label>Dorm Rooms</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="choice" value="sports" class="check" />
+                                    <label>Sports</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    
+                </tr>
+                
+                <tr>
+                     <td>
+                        <label>How were you interested in GMU?</label><br><br><br>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input id="radio" type="radio" name="aware"  value="Friends"  class="radio"/>
+                                    <label>Friends</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="aware"  value="Television" class="radio" />
+                                    <label>Television</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="aware"  value="Internet" class="radio" />
+                                    <label>Internet</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="radio" name="aware"  value="Others" class="radio" />
+                                    <label>Other</label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                
+                 
+                    <td>
+                        <label>High School Graduation month</label><br>
+                        <input list="datalist" placeholder="Choose a Month" name ="month"  />
+                        <datalist id="datalist">
+                            <option value="January">
+                                <option value="February">
+                                    <option value="March">
+                                        <option value="April">
+                                            <option value="May">
+                                                <option value="June">
+                                                    <option value="July">
+                                                        <option value="August">
+                                                            <option value="September">
+                                                                <option value="October">
+                                                                    <option value="November">
+                                                                        <option value="December">
+                                                                            </datalist>
+                        </td>
+                        <td>
+                        <label>Year </label><br>
+                        <input id = "year" name = "year"  type="text" width="4" maxlength="4" placeholder="yyyy" required="required" />
+                    	</td>
+			 <tr>
+                    <td>
+                        <label>Additional Comments</label><br>
+                        <br>
+                        <textarea  name="comments" rows="10" cols="25"></textarea><br>
+                    </td>
+                
+               
+                
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <label><span class="formfield"></span>Data </label>
+                                    <br>
+                                    <textarea  name="data" id="textdata" rows="5" cols="25" required="required" onblur="DataCheck()"></textarea>
+                                </td>
+                              
+                </tr>
+                </table>
+        </td>
+       
+         <td>
+                <label>Likelihood of recommending this school</label>
+                <br>
+                <select name="likelihood">
+                    <option value="VeryLikely">Very Likely</option>
+                    <option value="Likely">Likely</option>
+                    <option value="UnLikely">Unlikely</option>
+                </select>
+            </td>
+        </tr>
+	
+		<tr>
+		<td>
+		<input type="submit" value="Submit" onclick="validate()">
+        <input type="reset" value = "Reset">
+	</td>
+	</tr>
+</table>
+</form>
+</body>
+</html>

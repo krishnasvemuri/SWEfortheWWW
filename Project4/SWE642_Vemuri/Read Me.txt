@@ -1,0 +1,7 @@
+<!-- Krishna Sindhuri Vemuri- G01024066 -->
+
+1. Unzip the file SWE642_Vemuri
+2. Export SWE642_Vemuri.war file onto Eclipse 
+3. Export the source files and all other required files into elipse
+4. Open index1.html from WebContent
+5. Click RunAs and run it on Tomcat 7.0 server
